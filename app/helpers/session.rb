@@ -5,3 +5,7 @@ end
 def logged_in?
   !!current_user
 end
+
+def is_current_user?(id)
+  current_user.id == id
+end
