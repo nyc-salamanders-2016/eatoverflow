@@ -6,7 +6,7 @@
     <p>
       <%= @question.body %>
     </p><br>
-    <a href="/questions/<=% @question.id %>/comments">Add a comment</a>
+    <a href="/questions/<%= @question.id %>/comments">Add a comment</a>
   </div>
   <br><br>
  <p><a href="/answers/new">Add an answer</a>
@@ -23,6 +23,6 @@
     posted: <%= answer.created_at %><br>
     by: <%= answer.user.username %><br><br>
     <%= answer.body %><br>
-    <a href="/answers/<=% answer.id %>/comments">Add a comment</a>
+    <a href="/answers/<%= answer.id %>/comments">Add a comment</a>
   <% end %>
 </div>
