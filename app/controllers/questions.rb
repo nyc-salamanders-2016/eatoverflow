@@ -8,8 +8,8 @@ get '/questions/new' do
 end
 
 post '/questions' do
-    question = Question.new(params[:question])
-  if question.save
+    @question = Question.new(params[:question])
+  if @question.save
     tag_array = params[:tags].split(' ')
     create_tags(tag_array)
     redirect '/questions'

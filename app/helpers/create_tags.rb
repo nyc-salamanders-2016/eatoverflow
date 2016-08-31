@@ -1,7 +1,7 @@
 def create_tags(tag_array)
     if !tag_array.empty?
       tag_array.each do |tag|
-      new_tag = Tag.find_or_create_by(name: tag)
+      new_tag = Tag.find_or_create_by(name: tag, question_id: @question.id)
       @question.tags << new_tag
       end
     end
