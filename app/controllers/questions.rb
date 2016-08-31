@@ -21,7 +21,6 @@ end
 
 get '/questions/:id' do
   @question = Question.find(params[:id])
-  @user = @question.user
   @answers = @question.answers
   erb :'questions/show'
 end
