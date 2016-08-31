@@ -1,0 +1,9 @@
+  <%= erb :'users/_show_errors' %>
+    <h5>Add Your Comment:</h5>
+    <form action="/questions/:id/comments" method="post">
+      <input type="text" name="comment[body]" placeholder=" Comment"><br><br>
+      <input type="hidden" name="comment[user_id]" value="<%=current_user.id %>">
+      <br>
+      <input type="submit" value="Comment"><br>
+    </form>
+</div>
