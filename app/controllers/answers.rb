@@ -25,7 +25,8 @@ post '/answers' do
 end
 
 get '/answers/:id/comments' do
-  erb :'_new_comment_form'
+  @answer = Answer.find(params[:id])
+  erb :'answers/_new_comment_form'
 end
 
 post '/answers/:id/comments' do
