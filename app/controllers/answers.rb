@@ -24,6 +24,21 @@ post '/answers' do
   end
 end
 
+get '/answers/:id/comments' do
+  erb :'_new_comment_form'
+end
+
+post '/answers/:id/comments' do
+  @answer = Answer.find(params[:id])
+  comment = @answer.comments.new(params[:comment])
+  if comment.save
+    redirect "/questions/#{@answer.question_id}"
+  else
+    @errors = comment.errors.full_messages
+    erb :'_new_comment_form'
+  end
+end
+
 get '/answers/:id' do
   @answer = Answer.find(params[:id])
   erb :'answers/show'
