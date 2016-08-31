@@ -1,0 +1,20 @@
+<div>
+  <h2><%= @question.title %></h2><br>
+  by: <%= @question.user.username %><br>
+  posted: <%= @question.created_at %><br>
+  <div>
+    <p>
+      <%= @question.body %>
+    </p>
+  </div>
+  <br><br>
+  <a href="/answers/new">Add an answer</a>
+  <br><br>
+  <h3>All answers:</h3>
+  <% @answers.each do |answer| %>
+    <h4><%= answer.title %></h4><br>
+    posted: <%= answer.created_at %><br>
+    by: <%= answer.user.username %><br><br>
+    <%= answer.body %><br>
+  <% end %>
+</div>
