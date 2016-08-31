@@ -86,6 +86,9 @@ namespace :generate do
 end
 
 namespace :db do
+  desc "Drop, create, migrate and seed the database"
+  task :reset => [:drop, :create, :migrate, :seed]
+
   desc "Create the database at #{DB_NAME}"
   task :create do
     puts "Creating database #{DB_NAME} if it doesn't exist..."
@@ -125,7 +128,7 @@ namespace :db do
   end
 end
 
-desc 'Start IRB with application environment loaded'
+desc 'Start PRY with application environment loaded'
 task "console" do
   exec "pry -r./config/environment"
 end
