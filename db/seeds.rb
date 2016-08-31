@@ -15,8 +15,8 @@ user3 = User.create( username: "eevee", email: "eevee@pokeman.com", password: "a
 
 
 tag1 = Tag.create( name: "philosophy", question_id: 1 )
-tag2 = Tag.create( name: "philosophy", question_id: 2 )
 
+tag2 = Tag.create( name: "philosophy", question_id: 2 )
 
 # vote1 = Vote.create( user_id: 3, value: 1, voteable_id: 1 voteable_type: ???? )
 
