@@ -8,7 +8,6 @@ get '/answers/new' do
 
   ## add authentication
 
-
   erb :'answers/new'
 end
 
