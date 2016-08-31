@@ -1,0 +1,10 @@
+<div>
+  <h1>All questions:</h1>
+  <ul>
+  <% @questions.each do |question| %>
+  <li>
+    <a href="/questions/<%= question.id %>"><%= question.title %></a>
+  </li>
+  <% end %>
+  </ul>
+</div>

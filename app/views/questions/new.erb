@@ -1,0 +1,15 @@
+<div>
+  <h3>Ask a question:</h3>
+  <%= erb :'/questions/_show_errors' %>
+  <form action="/questions" method="post">
+    <label>Title:</label><br>
+      <input type='text' name='question[title]'><br><br>
+    <label>Body:</label><br>
+      <textarea name="question[body]" rows="10" cols="50"></textarea><br><br>
+    <label>Tags:</label><br>
+    (separate with space):<br>
+      <input type='text' name='tags'><br><br>
+      <input type='hidden' name='question[user_id]' value='<%= current_user.id %>'><br><br>
+      <button class="submit" type="submit">Ask!</button>
+  </form>
+</div>
