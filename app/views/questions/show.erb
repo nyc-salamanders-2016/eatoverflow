@@ -8,7 +8,13 @@
     </p>
   </div>
   <br><br>
-  <a href="/answers/new">Add an answer</a>
+ <p><a href="/answers/new">Add an answer</a>
+ <form action="/questions/<%= @question.id %>/vote" method="post">
+ <input type="submit" value="upvote" name= "vote">
+ <input type="submit" value="downvote" name="vote">
+ <span>score: <%= @score %></span>
+ </form>
+  </p>
   <br><br>
   <h3>All answers:</h3>
   <% @answers.each do |answer| %>
