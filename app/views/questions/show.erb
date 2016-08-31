@@ -24,5 +24,11 @@
     by: <%= answer.user.username %><br><br>
     <%= answer.body %><br>
     <a href="/answers/<%= answer.id %>/comments">Add a comment</a>
+    <form action="/answers/<%= answer.id %>/vote" method="post">
+      <input type="submit" value="upvote" name= "vote">
+      <input type="submit" value="downvote" name="vote">
+      <span>score: <%= answer.votes.reduce(0) { |score, vote| score += vote.value } %></span>
+    </form>
   <% end %>
+
 </div>
