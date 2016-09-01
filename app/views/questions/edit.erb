@@ -1,4 +1,6 @@
-<h1>Edit your question</h1>
+<div class="page-header">
+  <h1>Edit your question</h1>
+</div>
   <%= erb :'_show_errors' %>
 <form action="/questions/<%= params[:id] %>" method="post">
   <input type="hidden" name="_method" value="put">
