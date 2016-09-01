@@ -1,4 +1,5 @@
-  <%= erb :'users/_show_errors' %>
+<div>
+  <%= erb :'_show_errors' %>
     <h5>Add Your Comment:</h5>
     <form action="/questions/:id/comments" method="post">
       <input type="text" name="comment[body]" placeholder=" Comment"><br><br>

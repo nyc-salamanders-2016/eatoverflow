@@ -1,11 +1,15 @@
 <h1>Edit your answer</h1>
-
-<form action="/answers" method="post">
-
-  <input type=“hidden” name=“_method” value=“put”>
-
+  <%= erb :'_show_errors' %>
+<form action="/answers/<%= params[:id] %>" method="post">
+  <input type="hidden" name="_method" value="put">
   <label for="body">Body:</label>
-  <input type="text" name="answer[body]">
+  <input type="text" value="<%= @answer.body %>" name="answer[body]">
   <br>
   <input type="submit" value="Submit">
+</form>
+
+<h2>Delete your answer</h2>
+<form action="/answers/<%= params[:id] %>" method="post">
+  <input type="hidden" name="_method" value=delete>
+  <input type="submit" value="DELETE">
 </form>

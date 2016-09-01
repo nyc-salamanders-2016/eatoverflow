@@ -12,20 +12,19 @@ get '/answers/new' do
 end
 
 post '/answers' do
-  @answer = Answer.new(params[:answer])
-
+  @answer = Answer.new(params[:answer].merge({ "user_id" => current_user.id }))
   ## add authentication
-  ## add user id to params
 
   if @answer.save
-    redirect '/answers'
+    redirect "/questions/#{params[:answer][:question_id]}"
   else
     erb :'answers/new'
   end
 end
 
 get '/answers/:id/comments' do
-  erb :'_new_comment_form'
+  # binding.pry
+  erb :'answers/_new_comment_form'
 end
 
 post '/answers/:id/comments' do
@@ -35,7 +34,7 @@ post '/answers/:id/comments' do
     redirect "/questions/#{@answer.question_id}"
   else
     @errors = comment.errors.full_messages
-    erb :'_new_comment_form'
+    erb :'answers/_new_comment_form'
   end
 end
 
@@ -56,7 +55,7 @@ put '/answers/:id' do
   @answer = Answer.find(params[:id]) #
   @answer.assign_attributes(params[:answer])
   if @answer.save
-    redirect '/answers'
+    redirect "/questions/#{@answer.question_id}"
   else
     erb :'answers/edit'
   end
@@ -65,5 +64,5 @@ end
 delete '/answers/:id' do
   @answer = Answer.find(params[:id])
   @answer.destroy
-  redirect '/answers'
+  redirect "/questions/#{@answer.question_id}"
 end
