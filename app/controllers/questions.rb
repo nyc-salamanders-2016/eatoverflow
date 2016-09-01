@@ -24,27 +24,34 @@ get '/questions/:id' do
   @answers = @question.answers #.order(best_answer: :desc, created_at: :desc)
   # HOW TO ORDER BY SCORE? I.E., get_score(question)
   @score = get_score(@question)
+  binding.pry
   erb :'questions/show'
 end
 
 get '/questions/:id/comments' do
   @question = Question.find(params[:id])
-  erb :'questions/_new_comment_form'
+  if request.xhr?
+    erb :'/questions/_new_comment_form', layout: false
+  else
+    erb :'/questions/_new_comment_form'
+  end
 end
 
 post '/questions/:id/comments' do
   @question = Question.find(params[:id])
-  comment = @question.comments.new(params[:comment])
-  if comment.save
+  @comment = @question.comments.new(params[:comment])
+  if @comment.save
+    # binding.pry
+    if request.xhr?
+      erb :'/questions/_new_comment_show', locals: {comment: @comment}, layout: false
+    else
     redirect "/questions/#{@question.id}"
+    end
   else
     @errors = comment.errors.full_messages
-    erb :'questions/_new_comment_form'
+    erb :'/questions/_new_comment_form'
   end
 end
-
-
-
 
 get '/questions/:id/edit' do
   @question = Question.find(params[:id])

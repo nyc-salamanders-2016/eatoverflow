@@ -13,23 +13,21 @@
   <p><%= @question.body %></p>
 
   <% if logged_in? %>
-
-  <form id="comment_question_form" action="/questions/<%= @question.id %>/comments" method="post">
-    <input type="hidden" value="<%= params[:id]%>" name="question_id">
+  <form id="comment_question_button" action="/questions/<%= @question.id %>/comments">
+    <input type="hidden" value="<%= params[:id] %>" name="question_id">
     <input type="submit" value="Add a comment">
   </form>
+  <div id="comment_question_button_container">
+  </div>
 
-<<<<<<< 4b1e421ed76a5eb6b4f42d7e89caf8df1154af8f
     <form action="/answers/new" >
       <input type="hidden" value="<%= params[:id]%>" name="question_id">
       <input type="submit" value="Answer the question">
     </form>
-=======
   <form action="/answers/new">
     <input type="hidden" value="<%= params[:id]%>" name="question_id">
     <input type="submit" value="Answer the question">
   </form>
->>>>>>> working on ajax
 
     <form action="/questions/<%= @question.id %>/vote" method="post">
       <input type="submit" value="upvote" name= "vote">
@@ -51,11 +49,16 @@
   <% if logged_in? && is_current_user?(@question.user_id) %>
     <a href="/questions/<%= @question.id %>/edit">Edit or delete your question</a>
   <% end %>
-
+  <div id="comment_question_container">
    <h5>Comments: </h5>
+   <ul>
    <% @question.comments.each do |comment| %>
         <%= comment.body %> - <%= comment.user.username %>
     <% end %>
+        <%= erb :'/questions/_new_comment_show', locals: {comment: comment } %>
+    <% end %>
+    </ul>
+  </div>
 
   <br><br>
 
@@ -85,6 +88,9 @@
       </form>
 
     <% end %>
+  <p>posted: <%= answer.created_at %></p>
+  <p>by: <%= answer.user.username %></p>
+    <%= answer.body %><br>
 
 
     <% if logged_in? %>
@@ -137,7 +143,9 @@
     Other answers:</p>
     <% end %>
 
-
+        <%= comment.body %> - <%= comment.user.username %><br>
+      <% end %>
+      <% end %>
   <% end %>
 
 </div>
