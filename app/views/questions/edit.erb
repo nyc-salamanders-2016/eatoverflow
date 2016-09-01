@@ -1,0 +1,16 @@
+<h1>Edit your question</h1>
+  <%= erb :'_show_errors' %>
+<form action="/questions/<%= params[:id] %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <label for="body">Body:</label>
+  <input type="text" value="<%= @question.title %>" name="question[title]">
+  <input type="text" value="<%= @question.body %>" name="question[body]">
+  <br>
+  <input type="submit" value="Submit">
+</form>
+
+<h2>Delete your question</h2>
+<form action="/questions/<%= params[:id] %>" method="post">
+  <input type="hidden" name="_method" value=delete>
+  <input type="submit" value="DELETE">
+</form>

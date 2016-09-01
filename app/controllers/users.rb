@@ -25,10 +25,10 @@ post '/users/login' do
   else
     @error = "Invalid username or password"
     erb :'users/login'
-  end 
+  end
 end
 
 get '/users/logout' do
-  session.delete(:user_id)
+  session.clear
   redirect '/'
 end

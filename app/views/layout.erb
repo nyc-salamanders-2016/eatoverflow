@@ -23,13 +23,13 @@
       <% if logged_in? %>
         <li>Hello, <%= current_user.username %></li>
         <li><a href="/users/logout">Sign out</a></li>
+        <li><a href="/questions/new">Ask!</a></li>
       <% else %>
         <li><a href="/users/new">Register</a></li>
         <li><a href="/users/login">Sign in</a></li>
       <% end %>
-      <li><a href="/questions">Questions</a></li>
-      <li><a href="/questions/new">Ask!</a></li>
-      <li><a href="/">Home</a></li>
+        <li><a href="/questions">Questions</a></li>
+        <li><a href="/">Home</a></li>
     </ul>
   </nav>
   <%= yield %>
