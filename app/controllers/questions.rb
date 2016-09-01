@@ -27,14 +27,15 @@ get '/questions/:id' do
 end
 
 get '/questions/:id/comments' do
+  @question = Question.find(params[:id])
   erb :'questions/_new_comment_form'
 end
 
 post '/questions/:id/comments' do
   @question = Question.find(params[:id])
-  comment = @answer.comment.new(params[:comment])
+  comment = @question.comments.new(params[:comment])
   if comment.save
-    redirect "/questions/#{@question.question_id}"
+    redirect "/questions/#{@question.id}"
   else
     @errors = comment.errors.full_messages
     erb :'questions/_new_comment_form'

@@ -42,19 +42,25 @@
   <p>by: <%= answer.user.username %></p>
     <%= answer.body %><br>
 
+      <% answer.each do |comment| %>
+        <%= comment.body %> - <%= comment.user.username %>
+      <% end %>
     <% if logged_in? %>
+
     <a href="/answers/<%= answer.id %>/comments">Add a comment</a>
     <form action="/answers/<%= answer.id %>/vote" method="post">
       <input type="submit" value="upvote" name= "vote">
       <input type="submit" value="downvote" name="vote">
     </form>
     <% end %>
+
     <span>score: <%= answer.votes.reduce(0) { |score, vote| score += vote.value } %></span>
 
     <% if logged_in? && is_current_user?(answer.user_id) %>
     <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
 
     <% end %>
+
   <% end %>
 
 </div>
