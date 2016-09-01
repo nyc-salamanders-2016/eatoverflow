@@ -1,7 +1,57 @@
-$(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+// ajax for comments
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+$(document).ready(function() {
+    //this shows the comment form for questions
+  $('#comment_question_button').submit(function(event){
+    event.preventDefault();
+    $.ajax({
+      method: 'GET',
+      url: $(event.target).attr('action')
+    }).done(function(response){
+      $('#comment_question_button_container').html(response);
+    });
+  })
+
+    // this submits the comment form for questions
+
+  $('#comment_question_button_container').on('submit', '#comment_question_form', function(event){
+    event.preventDefault();
+      $('#comment_question_form').remove();
+    $.ajax({
+      method: $(event.target).attr('method'),
+      url: $(event.target).attr('action'),
+      data: $(event.target).serialize()
+    }).done(function(response){
+      $('#comment_question_container').append(response);
+    })
+  })
+
+  //this shows the comment form for answers
+
+  $('#show_questions').on('submit', '.comment_answer_button', function(event){
+    event.preventDefault();
+    $.ajax({
+      method: 'GET',
+      url: $(event.target).attr('action')
+    }).done(function(response){
+      $('.comment_answer_button_container').html(response);
+    });
+  })
+
+  //this submits the comment form for answers
+
+   $('.comment_answer_button_container').on('submit', '#comment_answer_form', function(event){
+    event.preventDefault();
+    // debugger
+      $('#comment_answer_form').remove();
+    $.ajax({
+      method: $(event.target).attr('method'),
+      url: $(event.target).attr('action'),
+      data: $(event.target).serialize()
+    }).done(function(response){
+      $('.comment_answer_container').append(response);
+    })
+  })
+
+
 });
