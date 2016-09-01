@@ -33,7 +33,7 @@ post '/answers/:id/vote' do
     if vote.save
       redirect "/questions/#{@question.id}"
     else
-      @errors = vote.errors.full_messages
+      @ans_errors = vote.errors.full_messages
       erb :"questions/show"
     end
   else params[:vote] == "downvote"
@@ -41,15 +41,8 @@ post '/answers/:id/vote' do
     if vote.save
       redirect "/questions/#{@question.id}"
     else
-      @errors = vote.errors.full_messages
+      @ans_errors = vote.errors.full_messages
       erb :"questions/show"
     end
   end
 end
-#   if params[:vote] == "upvote"
-#     answer.votes.create(value: 1, user_id: current_user.id )
-#   else
-#     answer.votes.create(value: -1, user_id: current_user.id )
-#   end
-#   redirect "/questions/#{question.id}"
-# end

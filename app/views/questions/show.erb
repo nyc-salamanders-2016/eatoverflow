@@ -54,6 +54,11 @@
     No one has answered this question yet.
   <% else %>
     <h3>All answers</h3>
+    <% if @ans_errors %>
+    <% @ans_errors.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  <% end %>
     <% @answers.each do |answer| %>
 
       <h4><%= answer.body %></h4>
@@ -82,6 +87,7 @@
         <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
 
       <% end %>
+
 
       <br>
       <h5>Comments: </h5>
