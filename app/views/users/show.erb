@@ -1,0 +1,37 @@
+<div>
+<h2>Welcome, <%=@user.username%>!</h2>
+<h4>Questions you've asked:</h4>
+<% if @user_questions.length > 0 %>
+<ul>
+  <% @user_questions.each do |question| %>
+  <li>
+    <a href="/questions/<%=question.id%>"><%= question.title %></a>
+  </li>
+  <% end %>
+</ul>
+<% else %>
+You haven't asked any questions yet! <a href="/questions/new">Ask a question</a>.
+<% end %>
+<h4>Questions you've answered:</h4>
+<% if @user_answers.length > 0 %>
+<ul>
+  <% @user_answers.each do |answer| %>
+  <li>
+    <a href="/questions/<%= answer.question.id %>"><%= answer.question.title %></a>
+  </li>
+  <% end %>
+</ul>
+<% else %>
+You haven't answered any questions yet! <a href="/questions">Browse questions</a>.
+<% end %>
+<h4>Recent posts you've liked:</h4>
+<% if @liked_posts %>
+  <ul>
+    <% @liked_posts.each do |question| %>
+    <li><a href="/questions/question.id"><%= question.title %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+You haven't upvoted anything! <a href="/questions">Browse questions</a>.
+<% end %>
+</div>
