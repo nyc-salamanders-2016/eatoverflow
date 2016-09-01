@@ -15,20 +15,21 @@ BEST ANSWER
 <!-- show which answer is selected as best answer
  -->
 
-next: display best answer at top
+<!-- next: display best answer at top -->
 
 <!-- 
 the creator can
 chose the best answer
  -->
-add questions on home page
+<!-- add questions on home page
 
-add scores to question page
+add scores to question page -->
 
 Stretch:
 Responses should be sorted chronologically, with oldest first.
 
 Answers should be sorted by "the best" first, followed by most highly-voted.
+HOW TO GET THE MOST HIGHLY VOTED
 
 Users should be able to see questions sorted three ways: highest-voted, most recent, and "trending."
 
