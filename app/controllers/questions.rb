@@ -14,7 +14,7 @@ post '/questions' do
     create_tags(tag_array)
     redirect '/questions'
   else
-    @errors = question.errors.full_messages
+    @errors = @question.errors.full_messages
     erb :'questions/new'
   end
 end
