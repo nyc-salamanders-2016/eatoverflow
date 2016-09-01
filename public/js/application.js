@@ -1,5 +1,3 @@
-// ajax for comments
-
 $(document).ready(function() {
     //this shows the comment form for questions
   $('#comment_question_button').submit(function(event){
