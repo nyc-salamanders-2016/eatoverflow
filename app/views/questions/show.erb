@@ -1,4 +1,4 @@
-<div>
+<div id="question_container">
   <h2><%= @question.title %></h2>
   <p>by: <%= @question.user.username %></p>
   <p>posted: <%= @question.created_at %></p>
@@ -14,10 +14,10 @@
 
   <% if logged_in? %>
 
-    <form action="/questions/<%= @question.id %>/comments" >
-      <input type="hidden" value="<%= params[:id]%>" name="question_id">
-      <input type="submit" value="Add a comment">
-    </form>
+  <form id="comment_question_form" action="/questions/<%= @question.id %>/comments" >
+    <input type="hidden" value="<%= params[:id]%>" name="question_id">
+    <input type="submit" value="Add a comment">
+  </form>
 
     <form action="/answers/new" >
       <input type="hidden" value="<%= params[:id]%>" name="question_id">
