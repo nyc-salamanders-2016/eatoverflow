@@ -1,15 +1,10 @@
-
-get '/answers' do
-  @answers = Answer.all
-  erb :'answers/index'
-end
-
 get '/answers/new' do
-  if logged_in?
-    erb :'answers/new'
-  else
-    status 404
-  end
+    if request.xhr?
+      erb :'answers/_new_answer_form', layout: false
+    else
+      erb :'answers/new'
+    end
+    # erb :'answers/new'
 end
 
 post '/answers' do

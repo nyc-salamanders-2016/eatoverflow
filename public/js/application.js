@@ -6,7 +6,7 @@ $(document).ready(function() {
       method: 'GET',
       url: $(event.target).attr('action')
     }).done(function(response){
-      $('#comment_question_button_container').html(response);
+      $('#comment_question_form_container').html(response);
     });
   })
 
@@ -32,7 +32,7 @@ $(document).ready(function() {
       method: 'GET',
       url: $(event.target).attr('action')
     }).done(function(response){
-      $('.comment_answer_button_container').html(response);
+      $('.comment_answer_form_container').html(response);
     });
   })
 
@@ -64,7 +64,7 @@ $(document).ready(function() {
     });
     request.done(function(response){
       debugger
-      $(event.target).next().next().next().html(response) 
+      $(event.target).next().next().next().html(response)
     });
   });
 
@@ -81,7 +81,7 @@ $(document).ready(function() {
     });
     request.done(function(response){
       debugger
-      $(event.target).next().next().html(response) 
+      $(event.target).next().next().html(response)
     });
   });
 
@@ -98,7 +98,7 @@ $(document).ready(function() {
     });
     request.done(function(response){
       debugger
-      $(event.target).next().next().html(response) 
+      $(event.target).next().next().html(response)
     });
   });
 
@@ -115,7 +115,19 @@ $(document).ready(function() {
     });
     request.done(function(response){
       debugger
-      $(event.target).next().html(response) 
+      $(event.target).next().html(response)
+    });
+  });
+
+  // show new answer form
+  $('#new_answer_button').submit(function(event){
+    event.preventDefault();
+    $.ajax({
+      method: 'GET',
+      url: $(event.target).attr('action')
+    })
+    .done(function(response){
+      $('#new_answer_form_container').html(response);
     });
   });
 
