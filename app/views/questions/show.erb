@@ -28,6 +28,12 @@
     <input type="submit" value="downvote" name="vote">
   </form>
 
+  <br>
+
+  <% if @error %>
+      <li><%= @error %></li>
+  <% end %>
+
   <% end %>
 
   <p>Score: <%= @score %></p>
