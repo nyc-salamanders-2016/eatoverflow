@@ -14,15 +14,22 @@
 
   <% if logged_in? %>
 
-  <form id="comment_question_form" action="/questions/<%= @question.id %>/comments" >
+  <form id="comment_question_form" action="/questions/<%= @question.id %>/comments" method="post">
     <input type="hidden" value="<%= params[:id]%>" name="question_id">
     <input type="submit" value="Add a comment">
   </form>
 
+<<<<<<< 4b1e421ed76a5eb6b4f42d7e89caf8df1154af8f
     <form action="/answers/new" >
       <input type="hidden" value="<%= params[:id]%>" name="question_id">
       <input type="submit" value="Answer the question">
     </form>
+=======
+  <form action="/answers/new">
+    <input type="hidden" value="<%= params[:id]%>" name="question_id">
+    <input type="submit" value="Answer the question">
+  </form>
+>>>>>>> working on ajax
 
     <form action="/questions/<%= @question.id %>/vote" method="post">
       <input type="submit" value="upvote" name= "vote">
@@ -91,6 +98,10 @@
         <input type="submit" value="upvote" name="vote">
         <input type="submit" value="downvote" name="vote">
       </form>
+    <form action="/answers/<%= answer.id %>/comments" >
+    <input type="hidden" value="<%= params[:id]%>" name="question_id">
+    <input type="submit" value="Add a comment">
+    </form>
 
     <% end %>
 
