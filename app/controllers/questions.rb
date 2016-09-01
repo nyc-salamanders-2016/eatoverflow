@@ -24,7 +24,6 @@ get '/questions/:id' do
   @answers = @question.answers #.order(best_answer: :desc, created_at: :desc)
   # HOW TO ORDER BY SCORE? I.E., get_score(question)
   @score = get_score(@question)
-  binding.pry
   erb :'questions/show'
 end
 
@@ -41,7 +40,6 @@ post '/questions/:id/comments' do
   @question = Question.find(params[:id])
   @comment = @question.comments.new(params[:comment])
   if @comment.save
-    # binding.pry
     if request.xhr?
       erb :'/questions/_new_comment_show', locals: {comment: @comment}, layout: false
     else

@@ -5,16 +5,15 @@ get '/answers' do
 end
 
 get '/answers/new' do
-
-  ## add authentication
-
-  erb :'answers/new'
+  if logged_in?
+    erb :'answers/new'
+  else
+    status 404
+  end
 end
 
 post '/answers' do
   @answer = Answer.new(params[:answer].merge({ "user_id" => current_user.id }))
-  ## add authentication
-
   if @answer.save
     redirect "/questions/#{params[:answer][:question_id]}"
   else
@@ -23,21 +22,28 @@ post '/answers' do
 end
 
 get '/answers/:id/comments' do
-
   @answer = Answer.find(params[:id])
-
-  erb :'answers/_new_comment_form'
+  if request.xhr?
+    erb :'/answers/_new_comment_form', layout: false
+  else
+    erb :'answers/_new_comment_form'
+  end
 end
 
 post '/answers/:id/comments' do
   @answer = Answer.find(params[:id])
-  comment = @answer.comments.new(params[:comment])
-  if comment.save
-    redirect "/questions/#{@answer.question_id}"
+  @comment = @answer.comments.new(params[:comment])
+  if @comment.save
+    if request.xhr?
+      erb :'/answers/_new_comment_show', locals: {comment: @comment}, layout: false
+    else
+      redirect "/questions/#{@answer.question_id}"
+    end
   else
     @errors = comment.errors.full_messages
     erb :'answers/_new_comment_form'
   end
+  # p "something"
 end
 
 get '/answers/:id' do
@@ -46,11 +52,12 @@ get '/answers/:id' do
 end
 
 get '/answers/:id/edit' do
-  @answer = Answer.find(params[:id])
-  erb :'answers/edit'
-
-  ## add authentication
-
+  if logged_in?
+    @answer = Answer.find(params[:id])
+    erb :'answers/edit'
+  else
+    status 404
+  end
 end
 
 put '/answers/:id' do
