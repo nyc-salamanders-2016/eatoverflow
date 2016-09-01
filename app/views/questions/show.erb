@@ -4,7 +4,7 @@
   <p>posted: <%= @question.created_at %></p>
 
   <% if @question.tags %>
-  <p>tags:
+    <p>tags:
     <% @question.tags.each do |tag| %>
       <a href="/tags/<%= tag.id %>"><%= tag.name %></a>
     <% end %>
@@ -14,59 +14,62 @@
 
   <% if logged_in? %>
 
-  <form action="/questions/<%= @question.id %>/comments" >
-    <input type="hidden" value="<%= params[:id]%>" name="question_id">
-    <input type="submit" value="Add a comment">
-  </form>
+    <form action="/questions/<%= @question.id %>/comments" >
+      <input type="hidden" value="<%= params[:id]%>" name="question_id">
+      <input type="submit" value="Add a comment">
+    </form>
 
-  <form action="/answers/new" >
-    <input type="hidden" value="<%= params[:id]%>" name="question_id">
-    <input type="submit" value="Answer the question">
-  </form>
+    <form action="/answers/new" >
+      <input type="hidden" value="<%= params[:id]%>" name="question_id">
+      <input type="submit" value="Answer the question">
+    </form>
 
-  <form action="/questions/<%= @question.id %>/vote" method="post">
-    <input type="submit" value="upvote" name= "vote">
-    <input type="submit" value="downvote" name="vote">
-  </form>
+    <form action="/questions/<%= @question.id %>/vote" method="post">
+      <input type="submit" value="upvote" name= "vote">
+      <input type="submit" value="downvote" name="vote">
+    </form>
 
-  <br>
+    <br>
 
-  <% if @errors %>
-    <% @errors.each do |error| %>
-      <li><%= error %></li>
+    <% if @errors %>
+      <% @errors.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
     <% end %>
-  <% end %>
 
   <% end %>
 
   <p>Score: <%= @score %></p>
 
   <% if logged_in? && is_current_user?(@question.user_id) %>
-  <a href="/questions/<%= @question.id %>/edit">Edit or delete your question</a>
+    <a href="/questions/<%= @question.id %>/edit">Edit or delete your question</a>
   <% end %>
 
    <h5>Comments: </h5>
    <% @question.comments.each do |comment| %>
         <%= comment.body %> - <%= comment.user.username %>
-      <% end %>
+    <% end %>
 
   <br><br>
+
   <% if @answers.empty? %>
     No one has answered this question yet.
   <% else %>
     <h3>All answers</h3>
     <% if @ans_errors %>
-    <% @ans_errors.each do |error| %>
-      <li><%= error %></li>
+      <% @ans_errors.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
     <% end %>
   <% end %>
-    <% @answers.each do |answer| %>
+
+  <% @answers.each do |answer| %>
 
       <h4><%= answer.body %></h4>
       <p>posted: <%= long_form_date(answer.created_at) %></p>
       <p>by: <%= answer.user.username %></p>
 
-      <% if logged_in? && is_current_user?(answer.question.user_id) %>
+    <% if logged_in? && is_current_user?(answer.question.user_id) %>
 
       <form action="/answers/<%= answer.id %>/bestanswer" method="post">
         <input type="hidden" name="_method" value="put">
@@ -74,10 +77,10 @@
         <input type="submit" value="Select as best answer">
       </form>
 
-      <% end %>
+    <% end %>
 
 
-      <% if logged_in? %>
+    <% if logged_in? %>
 
       <form action="/answers/<%= answer.id %>/comments" >
         <input type="hidden" value="<%= params[:id]%>" name="question_id">
@@ -91,21 +94,20 @@
 
     <% end %>
 
-      <span>score: <%= get_score(answer) %></span>
+    <span>score: <%= get_score(answer) %></span>
 
 
-      <% if logged_in? && is_current_user?(answer.user_id) %>
-        <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
-
-      <% end %>
+    <% if logged_in? && is_current_user?(answer.user_id) %>
+      <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
+    <% end %>
 
     <span>Score: <%= get_score(answer) %></span>
 
-      <% if answer.best_answer  %>
+    <% if answer.best_answer  %>
       <p>**********************<br>
         BEST ANSWER!<br>
       **********************<p>
-      <% end %>
+    <% end %>
 
 
 
@@ -113,12 +115,11 @@
       <br>
 
       <h5>Comments: </h5>
-      <% answer.comments.each do |comment| %>
+    <% answer.comments.each do |comment| %>
           <%= comment.body %> - <%= comment.user.username %><br>
-      <% end %>
-
-
     <% end %>
+
+
 
     <% if answer.best_answer  %>
     <p>***********************************************************************<br>
