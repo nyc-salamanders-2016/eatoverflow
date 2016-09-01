@@ -1,5 +1,4 @@
-
-<div id="show_questions">
+  <div id="show_questions">
   <h2><%= @question.title %></h2>
   <p>by: <%= @question.user.username %></p>
   <p>posted: <%= @question.created_at %></p>
@@ -14,23 +13,22 @@
   <p><%= @question.body %></p>
 
   <% if logged_in? %>
-    <form id="comment_question_button" action="/questions/<%= @question.id %>/comments">
-      <input type="hidden" value="<%= params[:id] %>" name="question_id">
-      <input type="submit" value="Add a comment">
+  <form id="comment_question_button" action="/questions/<%= @question.id %>/comments">
+    <input type="hidden" value="<%= params[:id] %>" name="question_id">
+    <input type="submit" value="Add a comment">
+  </form>
+  <div id="comment_question_form_container">
+  </div>
+
+    <form id="new_answer_button" action="/answers/new" >
+      <input type="hidden" value="<%= params[:id]%>" name="question_id">
+      <input type="submit" value="Answer the question">
     </form>
-    <div id="comment_question_button_container">
+    <div id="new_answer_form_container">
     </div>
 
-      <form action="/answers/new" >
-        <input type="hidden" value="<%= params[:id]%>" name="question_id">
-        <input type="submit" value="Answer the question">
-      </form>
-
-    <form id="question-upvote" action="/questions/<%= @question.id %>/upvote" method="post">
+    <form action="/questions/<%= @question.id %>/vote" method="post">
       <input type="submit" value="upvote" name= "vote">
-    </form>
-
-    <form id="question-downvote" action="/questions/<%= @question.id %>/downvote" method="post">
       <input type="submit" value="downvote" name="vote">
     </form>
 
@@ -43,8 +41,7 @@
     <% end %>
   <% end %>
 
-
-  <p id="score">Score: <%= @score %></p>
+  <p>Score: <%= @score %></p>
 
   <% if logged_in? && is_current_user?(@question.user_id) %>
     <a href="/questions/<%= @question.id %>/edit">Edit or delete your question</a>
@@ -98,23 +95,32 @@
         <input type="submit" value="Add a comment">
       </form>
 
-      <form class="answer-upvote" action="/answers/<%= answer.id %>/upvote " method="post">
-        <input type="submit" value="upvote" name= "vote">
+      <form action="/answers/<%= answer.id %>/vote" method="post">
+        <input type="submit" value="upvote" name="vote">
+        <input type="submit" value="downvote" name="vote">
+      </form>
+      <form action="/answers/<%= answer.id %>/comments" >
+      <input type="hidden" value="<%= params[:id]%>" name="question_id">
+      <input type="submit" value="Add a comment">
       </form>
 
-      <form class="answer-downvote" action="/answers/<%= answer.id %>/downvote" method="post">
+      <form class="comment_answer_button" action="/answers/<%= answer.id %>/comments" >
+      <input type="hidden" value="<%= params[:id]%>" name="question_id">
+      <input type="submit" value="Add a comment">
+      </form>
+       <div class="comment_answer_form_container">
+      </div>
+      <form action="/answers/<%= answer.id %>/vote" method="post">
+        <input type="submit" value="upvote" name= "vote">
         <input type="submit" value="downvote" name="vote">
       </form>
 
-
-      <span>score: <%= get_score(answer) %></span>
-
     <% end %>
-
-
     <% if logged_in? && is_current_user?(answer.user_id) %>
       <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
     <% end %>
+
+    <span>Score: <%= get_score(answer) %></span>
 
     <% if answer.best_answer  %>
       <p>**********************<br>
@@ -123,6 +129,11 @@
     <% end %>
 
       <br>
+
+      <h5>Comments: </h5>
+    <% answer.comments.each do |comment| %>
+          <%= comment.body %> - <%= comment.user.username %><br>
+    <% end %>
 
     <% if answer.best_answer  %>
     <p>***********************************************************************<br>
