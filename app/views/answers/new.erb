@@ -1,4 +1,6 @@
-<h1>Create an answer</h1>
+<div class="page-header">
+  <h1>Create an answer</h1>
+</div>
   <%= erb :'_show_errors' %>
 <form action="/answers" method="post">
   <input type="hidden" value="<%= params[:question_id]%>" name="answer[question_id]">
