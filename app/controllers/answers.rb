@@ -56,7 +56,7 @@ get '/answers/:id/edit' do
     @answer = Answer.find(params[:id])
     erb :'answers/edit'
   else
-    status 404
+    erb :'404'
   end
 end
 
