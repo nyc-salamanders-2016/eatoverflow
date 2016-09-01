@@ -6,4 +6,4 @@ module GetScore
 
 end
 
-helpers GetScore 
+helpers GetScore

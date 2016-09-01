@@ -3,7 +3,9 @@
   <ul>
   <% @questions.each do |question| %>
   <li>
-    <a href="/questions/<%= question.id %>"><%= question.title %></a>
+    <a href="/questions/<%= question.id %>"><%= question.title %><br></a>
+    <%= long_form_date(question.created_at) %><br>
+    Score: <%= get_score(question) %>
   </li>
   <% end %>
   </ul>

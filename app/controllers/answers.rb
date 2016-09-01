@@ -54,7 +54,7 @@ get '/answers/:id/edit' do
 end
 
 put '/answers/:id' do
-  @answer = Answer.find(params[:id]) #
+  @answer = Answer.find(params[:id])
   @answer.assign_attributes(params[:answer])
   if @answer.save
     redirect "/questions/#{@answer.question_id}"
@@ -68,3 +68,22 @@ delete '/answers/:id' do
   @answer.destroy
   redirect "/questions/#{@answer.question_id}"
 end
+
+put '/answers/:id/bestanswer' do
+
+  @answer = Answer.find(params[:id])
+
+  # @question = Question.find(params[:question_id])
+  @answer.best_answer = true
+
+  unless @answer.best_answer_finder
+    if @answer.save
+      redirect "/questions/#{@answer.question_id}"
+    else
+      erb :'404'  # needs better route and error handling
+    end
+  else
+    erb :'404'
+  end
+end
+
