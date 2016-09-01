@@ -51,7 +51,74 @@ $(document).ready(function() {
     }).done(function(response){
       $('.comment_answer_container').append(response);
     })
-  })
+  });
 
+  //this upvotes a question
+
+  $('#question-upvote').submit(function(event){
+    event.preventDefault();
+    var vote = $(event.target).find("input[value='vote']").val();
+    debugger;
+    var request = $.ajax({
+      method: 'POST',
+      url: $(event.target).attr("action"),
+      data: {vote: vote}
+    });
+    request.done(function(response){
+      debugger
+      $(event.target).next().next().next().html(response) 
+    });
+  });
+
+  //this downvotes a question
+
+  $('#question-downvote').submit(function(event){
+    event.preventDefault();
+    var vote = $(event.target).find("input[value='vote']").val();
+    debugger;
+    var request = $.ajax({
+      method: 'POST',
+      url: $(event.target).attr("action"),
+      data: {vote: vote}
+    });
+    request.done(function(response){
+      debugger
+      $(event.target).next().next().html(response) 
+    });
+  });
+
+  //this upvotes answer
+
+  $('#show_questions').on("submit", ".answer-upvote", function(event){
+    event.preventDefault();
+    var vote = $(event.target).find("input[value='upvote']").val();
+    debugger;
+    var request = $.ajax({
+      method: 'POST',
+      url: $(event.target).attr("action"),
+      data: {vote: vote}
+    });
+    request.done(function(response){
+      debugger
+      $(event.target).next().next().html(response) 
+    });
+  });
+
+  //this downvotes a question
+
+  $('#show_questions').on("submit", ".answer-downvote", function(event){
+    event.preventDefault();
+    var vote = $(event.target).find("input[value='vote']").val();
+    debugger;
+    var request = $.ajax({
+      method: 'POST',
+      url: $(event.target).attr("action"),
+      data: {vote: vote}
+    });
+    request.done(function(response){
+      debugger
+      $(event.target).next().html(response) 
+    });
+  });
 
 });
