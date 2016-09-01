@@ -60,7 +60,7 @@
     </form>
     <% end %>
 
-    <span>score: <%= answer.votes.reduce(0) { |score, vote| score += vote.value } %></span>
+    <span>score: <%= get_score(answer) %></span>
 
     <% if logged_in? && is_current_user?(answer.user_id) %>
     <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>

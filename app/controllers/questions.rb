@@ -22,7 +22,7 @@ end
 get '/questions/:id' do
   @question = Question.find(params[:id])
   @answers = @question.answers
-  @score = @question.votes.reduce(0) { |score, vote| score += vote.value }
+  @score = get_score(@question)
   erb :'questions/show'
 end
 
