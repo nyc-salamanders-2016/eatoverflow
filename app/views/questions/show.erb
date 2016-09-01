@@ -30,8 +30,10 @@
 
   <br>
 
-  <% if @error %>
-      <li><%= @error %></li>
+  <% if @errors %>
+    <% @errors.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
   <% end %>
 
   <% end %>

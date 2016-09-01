@@ -4,25 +4,22 @@ post '/questions/:id/vote' do
   @score = get_score(@question)
 
   if params[:vote] == "upvote" 
-   upvote = @question.votes.new(value: 1, user_id: current_user.id )
-    if upvote.authenticate_vote(current_user.id, @question.id) == false
-      upvote.save
+    vote = @question.votes.new(value: 1, user_id: current_user.id )
+    if vote.save
       redirect "/questions/#{@question.id}"
     else
-      @error = "You can only vote once"
+      @errors = vote.errors.full_messages
       erb :"questions/show"
     end
-  else
-    downvote = @question.votes.new(value: -1, user_id: current_user.id )
-    if downvote.authenticate_vote(current_user.id, @question.id) == false
-      downvote.save
+  else params[:vote] == "downvote"
+    vote = @question.votes.new(value: -1, user_id: current_user.id )
+    if vote.save
       redirect "/questions/#{@question.id}"
     else
-      @error = "You can only vote once"
+      @errors = vote.errors.full_messages
       erb :"questions/show"
     end
   end
-  # redirect "/questions/#{@question.id}"
 end
 
 post '/answers/:id/vote' do
