@@ -30,6 +30,10 @@
   <a href="/questions/<%= @question.id %>/edit">Edit or delete your question</a>
   <% end %>
 
+   <h5>Comments: </h5> 
+   <% @question.comments.each do |comment| %>
+        <%= comment.body %> - <%= comment.user.username %>
+      <% end %>
 
   <br><br>
 
@@ -42,12 +46,14 @@
   <p>by: <%= answer.user.username %></p>
     <%= answer.body %><br>
 
-      <% answer.each do |comment| %>
-        <%= comment.body %> - <%= comment.user.username %>
-      <% end %>
+
     <% if logged_in? %>
 
-    <a href="/answers/<%= answer.id %>/comments">Add a comment</a>
+    <form action="/answers/<%= answer.id %>/comments" >
+    <input type="hidden" value="<%= params[:id]%>" name="question_id">
+    <input type="submit" value="Add a comment">
+  </form>
+
     <form action="/answers/<%= answer.id %>/vote" method="post">
       <input type="submit" value="upvote" name= "vote">
       <input type="submit" value="downvote" name="vote">
@@ -60,6 +66,12 @@
     <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
 
     <% end %>
+
+    <br>
+    <h5>Comments: </h5>
+    <% answer.comments.each do |comment| %>
+        <%= comment.body %> - <%= comment.user.username %><br>
+      <% end %>
 
   <% end %>
 
