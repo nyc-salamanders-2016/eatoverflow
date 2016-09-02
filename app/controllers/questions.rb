@@ -21,7 +21,7 @@ end
 
 get '/questions/:id' do
   @question = Question.find(params[:id])
-  @answers = @question.answers #.order(best_answer: :desc, created_at: :desc)
+  @answers = @question.answers.order(best_answer: :desc, created_at: :desc)
   # HOW TO ORDER BY SCORE? I.E., get_score(question)
   @score = get_score(@question)
   erb :'questions/show'

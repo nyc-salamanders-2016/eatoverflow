@@ -1,14 +1,18 @@
-  <div class="jumbotron">
+
+  <div style="background:#F2D8A7 !important" class="jumbotron">
     <div class="page-header">
-    <h1 class="page-header"><small>Welcome to</small> <%= 'EAT'.split('').shuffle.join %> overflow!</h1>
+      <h1 class="display-2"><small class="text-muted">Welcome to </small><%= 'eat'.split('').shuffle.join %>Overflow<small class="text-muted">!</small></h1>
     </div>
 
-    <p>Where authenticated users can ask questions and receive off-topic answers.</p>
+    <p class="lead">Where authenticated users can ask questions and receive off-topic answers.</p>
+
+    <% unless logged_in? %>
+      <a class="btn btn-primary btn-lg" href="/users/new" role="button">Sign up now!</a>
+    <% else %>
+      <a class="btn btn-success btn-lg" href="/questions/new" role="button">Ask a question!</a>
+    <% end %>
+
   </div>
 
-<div class="container-fluid">
-  <br>
-  <br>
-  <br>
+<img src="/images/cat_overflow.jpg" class="img-fluid" alt="Responsive cat">
 
-</div>

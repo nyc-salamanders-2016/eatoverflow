@@ -1,9 +1,21 @@
+
+<div class="container-fluid">
+
 <form action="/users/login" method="post">
-  <label for="username">Username:</label><br>
-  <input type="text" name="username"><br>
-  <label for="password">Password:</label><br>
-  <input type="password" name="password"><br>
-  <input type="submit" value="Log in!">
-</form><br>
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" class="form-control" id="LoginInputName" name="username">
+    <small id="emailHelp" class="form-text text-muted">By entering your name into the above form you wave all your constitutional rights.</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" class="form-control" id="LoginInputPassword" name="password">
+    <small id="passwordHelp" class="form-text text-muted">We'll only share your password with the highest bidder.</small>
+  </div>
+  <input type="submit" value="Log in!" class="btn btn-primary">
+</form>
+
 
 <%= erb :'_show_errors' %>
+
+</div>

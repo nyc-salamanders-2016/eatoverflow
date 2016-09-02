@@ -1,39 +1,63 @@
-  <div id="show_questions">
-  <h2><%= @question.title %></h2>
-  <p>by: <%= @question.user.username %></p>
-  <p>posted: <%= @question.created_at %></p>
+<div class="container-fluid" id="show_questions">
+
+<br>
+
+  <div class="page-header">
+    <h1 class="display-3"><%= @question.title %></h1>
+  </div>
+
+  <br>
+
+<% if logged_in? %>
+
+    <form id="question-upvote" action="/questions/<%= @question.id %>/upvote" method="post">
+      <input type="submit" class="btn btn-secondary btn-sm pull-xs-right" value="upvote" name= "vote">
+    </form>
+
+    <form id="question-downvote" action="/questions/<%= @question.id %>/downvote" method="post">
+      <input type="submit" class="btn btn-secondary btn-sm pull-xs-right" value="downvote" name="vote">
+    </form>
+
+<% end %>
+
+  <p class="pull-xs-right"><small>Score: </small><span class="tag tag-default tag-pill"><%= @score %></span>    </p>
+
+  <p><em>by <%= @question.user.username %>, <%= long_form_date(@question.created_at) %></em></p>
+
+  <% if logged_in? && is_current_user?(@question.user_id) %>
+    <a href="/questions/<%= @question.id %>/edit">Edit or delete your question</a>
+  <% end %>
 
   <% if @question.tags %>
-    <p>tags:
+    <p><small>tags</small>
     <% @question.tags.each do |tag| %>
       <a href="/tags/<%= tag.id %>"><%= tag.name %></a>
     <% end %>
   <% end %></p>
 
-  <p><%= @question.body %></p>
+
+
+<p class="lead">
+  <%= @question.body %>
+</p>
 
   <% if logged_in? %>
-  <form id="comment_question_button" action="/questions/<%= @question.id %>/comments">
-    <input type="hidden" value="<%= params[:id] %>" name="question_id">
-    <input type="submit" value="Add a comment">
-  </form>
-  <div id="comment_question_form_container">
-  </div>
 
     <form id="new_answer_button" action="/answers/new" method="post" >
       <input type="hidden" value="<%= params[:id] %>" name="question_id">
-      <input type="submit" value="Answer the question">
+      <input type="submit" class="btn btn-primary btn-sm" value="Answer the question">
     </form>
     <div id="new_answer_form_container">
     </div>
 
-    <form id="question-upvote" action="/questions/<%= @question.id %>/upvote" method="post">
-      <input type="submit" value="upvote" name= "vote">
-    </form>
+  <form id="comment_question_button" action="/questions/<%= @question.id %>/comments">
+    <input type="hidden" value="<%= params[:id] %>" name="question_id">
+    <input type="submit" class="btn btn-secondary btn-sm" value="Add a comment">
+  </form>
+  <div id="comment_question_form_container">
+  </div>
 
-    <form id="question-downvote" action="/questions/<%= @question.id %>/downvote" method="post">
-      <input type="submit" value="downvote" name="vote">
-    </form>
+
 
     <br>
 
@@ -44,15 +68,11 @@
     <% end %>
   <% end %>
 
-  <p>Score: <%= @score %></p>
 
-  <% if logged_in? && is_current_user?(@question.user_id) %>
-    <a href="/questions/<%= @question.id %>/edit">Edit or delete your question</a>
-  <% end %>
   <div id="comment_question_container">
-   <h5>Comments: </h5>
-   <ul>
-   <% @question.comments.each do |comment| %>
+   <h6>Comments</h6>
+   <ul class="list-unstyled text-muted">
+    <% @question.comments.each do |comment| %>
         <%= erb :'/questions/_new_comment_show', locals: { comment: comment } %>
     <% end %>
     </ul>
@@ -63,7 +83,7 @@
   <% if @answers.empty? %>
     No one has answered this question yet.
   <% else %>
-    <h3>All answers</h3>
+    <h3>Answers</h3>
     <% if @ans_errors %>
       <% @ans_errors.each do |error| %>
         <li><%= error %></li>
@@ -71,20 +91,28 @@
     <% end %>
   <% end %>
   <div id="display_answers">
+
   <% @answers.each do |answer| %>
+
+    <% if answer.best_answer  %>
+    <div>
+    <h3 class="display-5">BEST ANSWER</h3>
+    </div>
+    <% end %>
+
+  <p class="lead"><%= answer.body %></p>
+
+    <p><em>by <%= answer.user.username %>, <%= long_form_date(answer.created_at) %></em></p>
 
     <% if logged_in? && is_current_user?(answer.question.user_id) %>
 
       <form action="/answers/<%= answer.id %>/bestanswer" method="post">
         <input type="hidden" name="_method" value="put">
         <input type="hidden" value="<%= params[:id]%>" name="question_id">
-        <input type="submit" value="Select as best answer">
+        <input type="submit" class="btn btn-secondary btn-sm" value="Select as best answer">
       </form>
 
     <% end %>
-  <p><%= answer.body %></p>
-  <p>posted: <%= long_form_date(answer.created_at) %></p>
-  <p>by: <%= answer.user.username %></p>
 
      <% if logged_in? && is_current_user?(answer.user_id) %>
       <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
@@ -92,44 +120,45 @@
 
     <% if logged_in? %>
 
-      <form class="comment_answer_button" action="/answers/<%= answer.id %>/comments" >
-      <input type="hidden" value="<%= params[:id]%>" name="question_id">
-      <input type="submit" value="Add a comment">
-      </form>
-       <div class="comment_answer_form_container">
-      </div>
       <form class="answer-upvote" action="/answers/<%= answer.id %>/upvote " method="post">
-        <input type="submit" value="upvote" name= "vote">
+        <input type="submit" class="btn btn-secondary btn-sm pull-xs-right" value="upvote" name= "vote">
       </form>
 
       <form class="answer-downvote" action="/answers/<%= answer.id %>/downvote" method="post">
-        <input type="submit" value="downvote" name="vote">
+        <input type="submit" class="btn btn-secondary btn-sm pull-xs-right" value="downvote" name="vote">
       </form>
     <% end %>
 
-    <span>Score: <%= get_score(answer) %></span>
+    <span class="pull-xs-right"><small>Score: </small><span class="tag tag-default tag-pill"><%= get_score(answer) %></span>    </span>
 
-    <% if answer.best_answer  %>
-      <p>**********************<br>
-        BEST ANSWER!<br>
-      **********************<p>
-    <% end %>
 
-      <br>
+      <form class="comment_answer_button" action="/answers/<%= answer.id %>/comments" >
+      <input type="hidden" value="<%= params[:id]%>" name="question_id">
+      <input type="submit" class="btn btn-secondary btn-sm" value="Add a comment">
+      </form>
+       <div class="comment_answer_form_container">
+      </div>
 
-    <% if answer.best_answer  %>
-    <p>***********************************************************************<br>
-    Other answers:</p>
-    <% end %>
     <br>
-    <h5>Comments: </h5>
+    <% if answer.comments.length > 0 %>
+    <h6>Comments</h6>
+    <% end %>
     <div class="comment_answer_container">
-    <ul>
+    <ul class="list-unstyled text-muted">
     <% answer.comments.each do |comment| %>
         <%= erb :'/answers/_new_comment_show', locals: {comment: comment } %>
     <% end %>
     </ul>
-  </div>
+    </div>
+
+    <% if answer.best_answer  %>
+    <br>
+    <h3 class="display-6">Other answers:</h3>
+    <% else %>
+    <hr>
+    <% end %>
+    <br>
+
   <% end %>
 
 </div>
