@@ -51,6 +51,20 @@ post '/questions/:id/comments' do
   end
 end
 
+post '/questions/:id/answers/new' do
+  @question = Question.find(params[:id])
+  @answer = @question.answers.new(params[:answer])
+  if @answer.save
+    if request.xhr?
+      erb :'answers/_display_answer', locals: {answer: @answer }, layout: false
+    else
+    redirect "/questions/#{@question.id}"
+    end
+  else
+    erb :'answers/new'
+  end
+end
+
 get '/questions/:id/edit' do
   @question = Question.find(params[:id])
   erb :'questions/edit'

@@ -1,6 +1,5 @@
-<h4><%= answer.body %></h4>
-      <p>posted: <%= long_form_date(answer.created_at) %></p>
-      <p>by: <%= answer.user.username %></p>
+<p class="lead"><%= answer.body %></p>
+<p><em>by <%= answer.user.username %>, <%= long_form_date(answer.created_at) %></em></p>
 
     <% if logged_in? && is_current_user?(answer.question.user_id) %>
 
@@ -11,25 +10,20 @@
       </form>
 
     <% end %>
-  <p>posted: <%= answer.created_at %></p>
-  <p>by: <%= answer.user.username %></p>
-    <%= answer.body %><br>
-
 
     <% if logged_in? %>
 
-      <form class="comment_answer_button" action="/answers/<%= answer.id %>/comments" >
-      <input type="hidden" value="<%= answer.question_id %>" name="question_id">
-      <input type="submit" value="Add a comment">
+       <form class="comment_answer_button" action="/answers/<%= answer.id %>/comments" >
+      <input type="hidden" value="<%= params[:id]%>" name="question_id">
+      <input type="submit" class="btn btn-secondary btn-sm" value="Add a comment">
       </form>
        <div class="comment_answer_form_container">
       </div>
       <form class="answer-upvote" action="/answers/<%= answer.id %>/upvote " method="post">
-        <input type="submit" value="upvote" name= "vote">
+        <input type="submit" class="btn btn-secondary btn-sm pull-xs-right" value="upvote" name= "vote">
       </form>
-
       <form class="answer-downvote" action="/answers/<%= answer.id %>/downvote" method="post">
-        <input type="submit" value="downvote" name="vote">
+        <input type="submit" class="btn btn-secondary btn-sm pull-xs-right" value="downvote" name="vote">
       </form>
 
     <% end %>
@@ -37,4 +31,4 @@
       <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
     <% end %>
 
-    <span>Score: <%= get_score(answer) %></span>
+    <span class="pull-xs-right"><span>Score: <%= get_score(answer) %></span></span>
