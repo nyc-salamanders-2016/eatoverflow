@@ -27,8 +27,11 @@
     <div id="new_answer_form_container">
     </div>
 
-    <form action="/questions/<%= @question.id %>/vote" method="post">
+    <form id="question-upvote" action="/questions/<%= @question.id %>/upvote" method="post">
       <input type="submit" value="upvote" name= "vote">
+    </form>
+
+    <form id="question-downvote" action="/questions/<%= @question.id %>/downvote" method="post">
       <input type="submit" value="downvote" name="vote">
     </form>
 
@@ -90,28 +93,17 @@
 
     <% if logged_in? %>
 
-      <form action="/answers/<%= answer.id %>/comments" >
-        <input type="hidden" value="<%= params[:id]%>" name="question_id">
-        <input type="submit" value="Add a comment">
-      </form>
-
-      <form action="/answers/<%= answer.id %>/vote" method="post">
-        <input type="submit" value="upvote" name="vote">
-        <input type="submit" value="downvote" name="vote">
-      </form>
-      <form action="/answers/<%= answer.id %>/comments" >
-      <input type="hidden" value="<%= params[:id]%>" name="question_id">
-      <input type="submit" value="Add a comment">
-      </form>
-
       <form class="comment_answer_button" action="/answers/<%= answer.id %>/comments" >
       <input type="hidden" value="<%= params[:id]%>" name="question_id">
       <input type="submit" value="Add a comment">
       </form>
        <div class="comment_answer_form_container">
       </div>
-      <form action="/answers/<%= answer.id %>/vote" method="post">
+      <form class="answer-upvote" action="/answers/<%= answer.id %>/upvote " method="post">
         <input type="submit" value="upvote" name= "vote">
+      </form>
+
+      <form class="answer-downvote" action="/answers/<%= answer.id %>/downvote" method="post">
         <input type="submit" value="downvote" name="vote">
       </form>
 
