@@ -5,9 +5,9 @@
   <ul class="list-group">
   <% @questions.each do |question| %>
   <li class="list-group-item">
-    <h2><a href="/questions/<%= question.id %>"><%= question.title %><br></a></h2>
-    <%= long_form_date(question.created_at) %><br>
-    Score: <%= get_score(question) %>
+    <span class="tag tag-default tag-pill pull-xs-right"><%= get_score(question) %></span>
+    <h4><a href="/questions/<%= question.id %>"><%= question.title %></a></h4><small class="text-muted"><%= long_form_date(question.created_at) %></small>
+
   </li>
   <% end %>
   </ul>

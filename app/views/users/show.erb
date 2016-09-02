@@ -1,40 +1,56 @@
+
 <div class="container-fluid">
 
 <div class="page-header">
-<h1>Welcome, <%=@user.username%>!</h1>
+  <h1 class="display-3">Welcome, <%=@user.username%>!</h1>
 </div>
-<h2>Questions you've asked:</h4>
-<% if @user_questions.length > 0 %>
-<ul>
+
+<br>
+
+<div class="list-group">
+  <p class="list-group-item active">
+    Questions you've asked
+  </p>
+  <% if @user_questions.length > 0 %>
   <% @user_questions.each do |question| %>
-  <li>
-    <a href="/questions/<%=question.id%>"><%= question.title %></a>
-  </li>
+    <a href="/questions/<%=question.id%>" class="list-group-item list-group-item-action"><%= question.title %></a>
   <% end %>
-</ul>
-<% else %>
-You haven't asked any questions yet! <a href="/questions/new">Ask a question</a>.
-<% end %>
-<h4>Questions you've answered:</h4>
-<% if @user_answers.length > 0 %>
-<ul>
-  <% @user_answers.each do |answer| %>
-  <li>
-    <a href="/questions/<%= answer.question.id %>"><%= answer.question.title %></a>
-  </li>
+  <% else %>
+  <p class="list-group-item list-group-item-action">You haven't asked any questions yet! <a href="/questions/new">Ask a question</a>!</p>
   <% end %>
-</ul>
-<% else %>
-You haven't answered any questions yet! <a href="/questions">Browse questions</a>.
-<% end %>
-<h4>Recent posts you've liked:</h4>
-<% if @liked_posts %>
-  <ul>
-    <% @liked_posts.each do |question| %>
-    <li><a href="/questions/question.id"><%= question.title %></a></li>
-    <% end %>
-  </ul>
-<% else %>
-You haven't upvoted anything! <a href="/questions">Browse questions</a>.
-<% end %>
 </div>
+
+<br>
+
+<div class="list-group">
+  <p class="list-group-item active">
+    Questions you've answered
+  </p>
+  <% if @user_answers.length > 0 %>
+  <% @user_answers.each do |answer| %>
+    <a href="/questions/<%=answer.question.id%>" class="list-group-item list-group-item-action"><%= answer.question.title %></a>
+  <% end %>
+  <% else %>
+  <p class="list-group-item list-group-item-action">You haven't answered any questions yet! <a href="/questions">Find a question to answer</a>!</p>
+  <% end %>
+</div>
+
+<br>
+
+<div class="list-group">
+  <p class="list-group-item active">
+    Posts you've liked
+  </p>
+  <% if @liked_posts %>     <!--  not going to else, even when empty!  -->
+  <% @liked_posts.each do |question| %>
+    <a href="/questions/<%=question.id%>" class="list-group-item list-group-item-action"><%= question.title %></a>
+  <% end %>
+  <% else %>
+    <p class="list-group-item list-group-item-action">You haven't voted on anything yet! <a href="/questions">Find a question</a>!</p>
+  <% end %>
+</div>
+
+<br><br><br>
+
+</div>
+
