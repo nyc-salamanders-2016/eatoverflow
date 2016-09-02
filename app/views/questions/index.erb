@@ -2,10 +2,10 @@
   <div class="page-header">
     <h1>All questions</h1>
   </div>
-  <ul>
+  <ul class="list-group">
   <% @questions.each do |question| %>
-  <li>
-    <a href="/questions/<%= question.id %>"><%= question.title %><br></a>
+  <li class="list-group-item">
+    <h2><a href="/questions/<%= question.id %>"><%= question.title %><br></a></h2>
     <%= long_form_date(question.created_at) %><br>
     Score: <%= get_score(question) %>
   </li>

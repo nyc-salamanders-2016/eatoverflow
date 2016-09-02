@@ -1,6 +1,9 @@
-<div>
-<h2>Welcome, <%=@user.username%>!</h2>
-<h4>Questions you've asked:</h4>
+<div class="container-fluid">
+
+<div class="page-header">
+<h1>Welcome, <%=@user.username%>!</h1>
+</div>
+<h2>Questions you've asked:</h4>
 <% if @user_questions.length > 0 %>
 <ul>
   <% @user_questions.each do |question| %>

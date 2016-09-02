@@ -1,5 +1,7 @@
-  <div id="show_questions">
-  <h2><%= @question.title %></h2>
+<div class="container-fluid" id="show_questions">
+  <div class="page-header">
+    <h1><%= @question.title %></h1>
+  </div>
   <p>by: <%= @question.user.username %></p>
   <p>posted: <%= @question.created_at %></p>
 

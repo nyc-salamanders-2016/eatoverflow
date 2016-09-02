@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
 
 
-  <title>TEA Overflow</title>
+  <title><%= 'eat'.split('').shuffle.join %>Overflow</title>
 </head>
 <body>
 <!--   <nav>
@@ -43,13 +43,17 @@
   </nav> -->
 
   <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-    <!-- <div class="container"> -->
-      <a class="navbar-brand" href="/">eatOverflow</a>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><%= 'eat'.split('').shuffle.join %>Overflow</a>
       <ul class="nav navbar-nav">
           <li class="nav-item active"><a class="nav-link" href="/">home</a></li>
           <li class="nav-item"><a class="nav-link" href="/questions">questions</a></li>
         <% if logged_in? %>
           <li class="nav-item"><a class="nav-link" href="/questions/new">ASK!</a></li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav pull-xs-right">
+        <% if logged_in? %>
           <li class="nav-item"><a class="nav-link" href="/users/logout">sign out</a></li>
           <li class="nav-item"><a class="nav-link" href="/users/<%= current_user.id %>"><%= current_user.username %></a></li>
         <% else %>
@@ -57,7 +61,7 @@
           <li class="nav-item"><a class="nav-link" href="/users/login">sign in</a></li>
         <% end %>
       </ul>
-  <!--  </div> /.container -->
+   </div>
   </nav><!-- /.navbar -->
 
 

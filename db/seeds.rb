@@ -5,11 +5,17 @@ user2 = User.create( username: "dracula", email: "dracula@romania.com", password
 
 user3 = User.create( username: "eevee", email: "eevee@pokeman.com", password: "asdfasdf" )
 
+user4 = User.create( username: "GlaDOS", email: "glados@glados.com", password: "asdfasdf" )
+
 question1 = Question.create( title: "What is a man?", body: "This is a body", user_id: 2 )
 
-question2 = Question.create( title: "How many roads must a man walk down?", body: "This is a body", user_id: 1 )
+question2 = Question.create( title: "What is a dog", body: "This is a body", user_id: 1 )
 
-question2 = Question.create( title: "How many roads must a man walk down?", body: "This is a body", user_id: 1 )
+question3 = Question.create( title: "How many roads must a man walk down?", body: "This is a body", user_id: 1 )
+
+question4 = Question.create( title: "Did you know you can donate one or all of your vital organs to the Aperture Science self esteem fund for girls?", body: "It's true!", user_id: 4 )
+
+question5 = Question.create( title: "What is tea time?", body: "This is a body", user_id: 1 )
 
 answer1 = Answer.create( body: "Man is a being of spirit", user_id: 1, question_id: 1 )
 
