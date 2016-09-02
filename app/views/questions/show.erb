@@ -28,7 +28,7 @@
     <a href="/questions/<%= @question.id %>/edit">Edit or delete your question</a>
   <% end %>
 
-  <% if @question.tags %>
+  <% if @question.tags.length > 0 %>
     <p><small>tags</small>
     <% @question.tags.each do |tag| %>
       <a href="/tags/<%= tag.id %>"><%= tag.name %></a>
