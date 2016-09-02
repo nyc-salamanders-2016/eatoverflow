@@ -43,12 +43,12 @@
 
   <% if logged_in? %>
 
-    <form id="new_answer_button" action="/answers/new" method="post" >
-      <input type="hidden" value="<%= params[:id] %>" name="question_id">
-      <input type="submit" class="btn btn-primary btn-sm" value="Answer the question">
-    </form>
-    <div id="new_answer_form_container">
-    </div>
+<form id="new_answer_form" action="/questions/<%=@question.id%>/answers/new" method="post">
+  <input type="hidden" value="<%= current_user.id %>" name="answer[user_id]">
+  <textarea class="form-control" rows="4" cols="50" name="answer[body]">Answer</textarea>
+  <br>
+  <input type="submit" class="btn btn-primary btn-sm"  value="Submit Answer">
+</form>
 
   <form id="comment_question_button" action="/questions/<%= @question.id %>/comments">
     <input type="hidden" value="<%= params[:id] %>" name="question_id">
@@ -56,9 +56,6 @@
   </form>
   <div id="comment_question_form_container">
   </div>
-
-
-
     <br>
 
     <% if @errors %>
