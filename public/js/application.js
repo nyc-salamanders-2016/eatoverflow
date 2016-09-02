@@ -32,7 +32,7 @@ $(document).ready(function() {
       method: 'GET',
       url: $(event.target).attr('action')
     }).done(function(response){
-      $('.comment_answer_form_container').html(response);
+      $(event.target).next().html(response)
     });
   })
 

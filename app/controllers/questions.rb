@@ -74,7 +74,7 @@ post '/questions/:id/answers/new' do
 end
 
 get '/questions/:id/edit' do
-  @question = Question.find(params[:id])
+  @question = Question.find(params[:id]) 
   if logged_in? && @question.user_id == current_user.id
     erb :'questions/edit'
   else
