@@ -55,7 +55,6 @@ get '/questions/:id/edit' do
   @question = Question.find(params[:id])
   erb :'questions/edit'
 
-  ## add authentication
 
 end
 
