@@ -111,15 +111,27 @@ $(document).ready(function() {
   });
 
   // show new answer form
-  $('#new_answer_button').submit(function(event){
-    event.preventDefault();
-    $.ajax({
-      method: 'GET',
-      url: $(event.target).attr('action')
-    })
-    .done(function(response){
-      $('#new_answer_form_container').html(response);
-    });
-  });
+  // $('#new_answer_button').submit(function(event){
+  //   event.preventDefault();
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: $(event.target).attr('action')
+  //   })
+  //   .done(function(response){
+  //     $('#new_answer_form_container').html(response);
+  //   });
+  // });
+
+  // $('#new_answer_form_container').on('submit', '#new_answer_form', function(event){
+  //   event.preventDefault();
+  //   $('#new_answer_form').remove();
+  //   $.ajax({
+  //     method: $(event.target).attr('method'),
+  //     url: $(event.target).attr('action'),
+  //     data: $(event.target).serialize()
+  //   }).done(function(response){
+  //     $('#display_answers').append(response);
+  //   })
+  // })
 
 });

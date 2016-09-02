@@ -20,8 +20,8 @@
   <div id="comment_question_form_container">
   </div>
 
-    <form id="new_answer_button" action="/answers/new" >
-      <input type="hidden" value="<%= params[:id]%>" name="question_id">
+    <form id="new_answer_button" action="/answers/new" method="post" >
+      <input type="hidden" value="<%= params[:id] %>" name="question_id">
       <input type="submit" value="Answer the question">
     </form>
     <div id="new_answer_form_container">
@@ -70,12 +70,8 @@
       <% end %>
     <% end %>
   <% end %>
-
+  <div id="display_answers">
   <% @answers.each do |answer| %>
-
-      <h4><%= answer.body %></h4>
-      <p>posted: <%= long_form_date(answer.created_at) %></p>
-      <p>by: <%= answer.user.username %></p>
 
     <% if logged_in? && is_current_user?(answer.question.user_id) %>
 
@@ -86,10 +82,13 @@
       </form>
 
     <% end %>
-  <p>posted: <%= answer.created_at %></p>
+  <p><%= answer.body %></p>
+  <p>posted: <%= long_form_date(answer.created_at) %></p>
   <p>by: <%= answer.user.username %></p>
-    <%= answer.body %><br>
 
+     <% if logged_in? && is_current_user?(answer.user_id) %>
+      <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
+    <% end %>
 
     <% if logged_in? %>
 
@@ -106,10 +105,6 @@
       <form class="answer-downvote" action="/answers/<%= answer.id %>/downvote" method="post">
         <input type="submit" value="downvote" name="vote">
       </form>
-
-    <% end %>
-    <% if logged_in? && is_current_user?(answer.user_id) %>
-      <a href="/answers/<%= answer.id %>/edit">Edit or delete your answer</a>
     <% end %>
 
     <span>Score: <%= get_score(answer) %></span>
@@ -121,11 +116,6 @@
     <% end %>
 
       <br>
-
-      <h5>Comments: </h5>
-    <% answer.comments.each do |comment| %>
-          <%= comment.body %> - <%= comment.user.username %><br>
-    <% end %>
 
     <% if answer.best_answer  %>
     <p>***********************************************************************<br>
@@ -141,4 +131,6 @@
     </ul>
   </div>
   <% end %>
+
+</div>
 </div>

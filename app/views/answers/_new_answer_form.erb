@@ -1,5 +1,6 @@
-<form action="/answers" method="post">
-  <input type="hidden" value="<%= params[:question_id]%>" name="answer[question_id]">
+<form id="new_answer_form" action="/answers" method="post">
+  <input type="hidden" value="<%= question.id %>" name="answer[question_id]">
+   <input type="hidden" value="<%= current_user.id %>" name="answer[user_id]">
   <label for="body">Body:</label>
   <input type="text" name="answer[body]">
   <br>
