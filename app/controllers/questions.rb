@@ -4,7 +4,11 @@ get '/questions' do
 end
 
 get '/questions/new' do
-  erb :'questions/new'
+  if logged_in?
+    erb :'questions/new'
+  else
+    erb :'404'
+  end
 end
 
 post '/questions' do
@@ -28,11 +32,15 @@ get '/questions/:id' do
 end
 
 get '/questions/:id/comments' do
-  @question = Question.find(params[:id])
-  if request.xhr?
-    erb :'/questions/_new_comment_form', layout: false
+  if logged_in?
+    @question = Question.find(params[:id])
+    if request.xhr?
+      erb :'/questions/_new_comment_form', layout: false
+    else
+      erb :'/questions/_new_comment_form'
+    end
   else
-    erb :'/questions/_new_comment_form'
+    erb :'404'
   end
 end
 
@@ -66,10 +74,12 @@ post '/questions/:id/answers/new' do
 end
 
 get '/questions/:id/edit' do
-  @question = Question.find(params[:id])
-  erb :'questions/edit'
-
-
+  @question = Question.find(params[:id] 
+  if logged_in? && @question.user_id == current_user.id
+    erb :'questions/edit'
+  else
+    erb :'404'
+  end
 end
 
 put '/questions/:id' do
