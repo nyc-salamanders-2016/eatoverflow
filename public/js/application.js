@@ -40,7 +40,6 @@ $(document).ready(function() {
 
    $('.comment_answer_button_container').on('submit', '#comment_answer_form', function(event){
     event.preventDefault();
-    // debugger
       $('#comment_answer_form').remove();
     $.ajax({
       method: $(event.target).attr('method'),
@@ -56,14 +55,12 @@ $(document).ready(function() {
   $('#question-upvote').submit(function(event){
     event.preventDefault();
     var vote = $(event.target).find("input[value='vote']").val();
-    debugger;
     var request = $.ajax({
       method: 'POST',
       url: $(event.target).attr("action"),
       data: {vote: vote}
     });
     request.done(function(response){
-      debugger
       $(event.target).next().next().next().html(response)
     });
   });
@@ -73,14 +70,12 @@ $(document).ready(function() {
   $('#question-downvote').submit(function(event){
     event.preventDefault();
     var vote = $(event.target).find("input[value='vote']").val();
-    debugger;
     var request = $.ajax({
       method: 'POST',
       url: $(event.target).attr("action"),
       data: {vote: vote}
     });
     request.done(function(response){
-      debugger
       $(event.target).next().next().html(response)
     });
   });
@@ -90,14 +85,12 @@ $(document).ready(function() {
   $('#show_questions').on("submit", ".answer-upvote", function(event){
     event.preventDefault();
     var vote = $(event.target).find("input[value='upvote']").val();
-    debugger;
     var request = $.ajax({
       method: 'POST',
       url: $(event.target).attr("action"),
       data: {vote: vote}
     });
     request.done(function(response){
-      debugger
       $(event.target).next().next().html(response)
     });
   });
@@ -107,14 +100,12 @@ $(document).ready(function() {
   $('#show_questions').on("submit", ".answer-downvote", function(event){
     event.preventDefault();
     var vote = $(event.target).find("input[value='vote']").val();
-    debugger;
     var request = $.ajax({
       method: 'POST',
       url: $(event.target).attr("action"),
       data: {vote: vote}
     });
     request.done(function(response){
-      debugger
       $(event.target).next().html(response)
     });
   });
