@@ -1,6 +1,8 @@
-get '/answers/new' do
+post '/answers/new' do
+  # binding.pry
+  @question = Question.find(params[:question_id])
     if request.xhr?
-      erb :'answers/_new_answer_form', layout: false
+      erb :'answers/_new_answer_form', locals: {question: @question}, layout: false
     else
       erb :'answers/new'
     end
@@ -8,9 +10,14 @@ get '/answers/new' do
 end
 
 post '/answers' do
-  @answer = Answer.new(params[:answer].merge({ "user_id" => current_user.id }))
+  @answer = Answer.new(params[:answer])
+  # binding.pry
   if @answer.save
-    redirect "/questions/#{params[:answer][:question_id]}"
+    if request.xhr?
+      erb :'answers/_display_answer', locals: {answer: @answer }, layout: false
+    else
+    redirect "/questions/#{@answer.question_id}"
+    end
   else
     erb :'answers/new'
   end
